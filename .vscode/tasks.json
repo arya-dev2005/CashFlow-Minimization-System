@@ -1,0 +1,31 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build Cash Flow Minimization",
+      "type": "shell",
+      "command": "g++",
+      "args": [
+        "-std=c++17",
+        "-Wall",
+        "-Wextra",
+        "-O2",
+        "main.cpp",
+        "UI.cpp",
+        "CashFlow.cpp",
+        "Graph.cpp",
+        "Utils.cpp",
+        "-o",
+        "cashflow.exe"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "detail": "Builds the modular C++17 cash flow minimization console app."
+    }
+  ]
+}

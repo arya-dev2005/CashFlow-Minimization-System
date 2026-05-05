@@ -1,0 +1,429 @@
+C:\Users\ADMIN\DSA\Cash-Flow>.\cashflow.exe
+
+========================================================================
+Cash Flow Minimization
+========================================================================
+1.  Add Transaction
+2.  View All Transactions
+3.  View Net Balances
+4.  Minimize Cash Flow
+5.  Show Settlement Steps
+6.  Simulation Mode
+7.  Graph Analysis
+8.  Export Final Settlements
+9.  Undo Last Transaction
+10. Reset System
+11. Exit
+------------------------------------------------------------------------
+Choose an option: 1
+
+========================================================================
+Add Transaction
+========================================================================
+Debtor name  : A
+Creditor name: B
+Amount owed  : 100
+Transaction added successfully.
+ID    Name                  Status               Balance
+------------------------------------------------------------------------
+0     A                     Owes                  100.00
+1     B                     Receives              100.00
+
+========================================================================
+Cash Flow Minimization
+========================================================================
+1.  Add Transaction
+2.  View All Transactions
+3.  View Net Balances
+4.  Minimize Cash Flow
+5.  Show Settlement Steps
+6.  Simulation Mode
+7.  Graph Analysis
+8.  Export Final Settlements
+9.  Undo Last Transaction
+10. Reset System
+11. Exit
+------------------------------------------------------------------------
+Choose an option: 1
+
+========================================================================
+Add Transaction
+========================================================================
+Debtor name  : B
+Creditor name: C
+Amount owed  : 50
+Transaction added successfully.
+ID    Name                  Status               Balance
+------------------------------------------------------------------------
+0     A                     Owes                  100.00
+1     B                     Receives               50.00
+2     C                     Receives               50.00
+
+========================================================================
+Cash Flow Minimization
+========================================================================
+1.  Add Transaction
+2.  View All Transactions
+3.  View Net Balances
+4.  Minimize Cash Flow
+5.  Show Settlement Steps
+6.  Simulation Mode
+7.  Graph Analysis
+8.  Export Final Settlements
+9.  Undo Last Transaction
+10. Reset System
+11. Exit
+------------------------------------------------------------------------
+Choose an option: 1
+
+========================================================================
+Add Transaction
+========================================================================
+Debtor name  : C
+Creditor name: A
+Amount owed  : 30
+Transaction added successfully.
+ID    Name                  Status               Balance
+------------------------------------------------------------------------
+0     A                     Owes                   70.00
+1     B                     Receives               50.00
+2     C                     Receives               20.00
+
+========================================================================
+Cash Flow Minimization
+========================================================================
+1.  Add Transaction
+2.  View All Transactions
+3.  View Net Balances
+4.  Minimize Cash Flow
+5.  Show Settlement Steps
+6.  Simulation Mode
+7.  Graph Analysis
+8.  Export Final Settlements
+9.  Undo Last Transaction
+10. Reset System
+11. Exit
+------------------------------------------------------------------------
+Choose an option: 2
+
+========================================================================
+Transaction History
+========================================================================
+#     Debtor            Creditor                  Amount
+------------------------------------------------------------------------
+1     A                 B                         100.00
+2     B                 C                          50.00
+3     C                 A                          30.00
+
+========================================================================
+Cash Flow Minimization
+========================================================================
+1.  Add Transaction
+2.  View All Transactions
+3.  View Net Balances
+4.  Minimize Cash Flow
+5.  Show Settlement Steps
+6.  Simulation Mode
+7.  Graph Analysis
+8.  Export Final Settlements
+9.  Undo Last Transaction
+10. Reset System
+11. Exit
+------------------------------------------------------------------------
+Choose an option: 3
+
+========================================================================
+Net Balances
+========================================================================
+ID    Name                  Status               Balance
+------------------------------------------------------------------------
+0     A                     Owes                   70.00
+1     B                     Receives               50.00
+2     C                     Receives               20.00
+
+========================================================================
+Cash Flow Minimization
+========================================================================
+1.  Add Transaction
+2.  View All Transactions
+3.  View Net Balances
+4.  Minimize Cash Flow
+5.  Show Settlement Steps
+6.  Simulation Mode
+7.  Graph Analysis
+8.  Export Final Settlements
+9.  Undo Last Transaction
+10. Reset System
+11. Exit
+------------------------------------------------------------------------
+Choose an option: 4
+
+========================================================================
+Optimized Settlements
+========================================================================
+#     Payer             Receiver                  Amount
+------------------------------------------------------------------------
+1     A                 B                          50.00
+2     A                 C                          20.00
+
+------------------------------------------------------------------------
+Transactions before optimization : 3
+Transactions after optimization  : 2
+Transactions reduced             : 1
+
+========================================================================
+Cash Flow Minimization
+========================================================================
+1.  Add Transaction
+2.  View All Transactions
+3.  View Net Balances
+4.  Minimize Cash Flow
+5.  Show Settlement Steps
+6.  Simulation Mode
+7.  Graph Analysis
+8.  Export Final Settlements
+9.  Undo Last Transaction
+10. Reset System
+11. Exit
+------------------------------------------------------------------------
+Choose an option: 5
+
+========================================================================
+Step-by-Step Settlement Mode
+========================================================================
+Step 1: choose largest debtor A (owes 70.00) and largest creditor B (receives 50.00).
+        Settle 50.00. Remaining debtor liability: 20.00, creditor claim: 0.00.
+Step 2: choose largest debtor A (owes 20.00) and largest creditor C (receives 20.00).
+        Settle 20.00. Remaining debtor liability: 0.00, creditor claim: 0.00.
+
+========================================================================
+Cash Flow Minimization
+========================================================================
+1.  Add Transaction
+2.  View All Transactions
+3.  View Net Balances
+4.  Minimize Cash Flow
+5.  Show Settlement Steps
+6.  Simulation Mode
+7.  Graph Analysis
+8.  Export Final Settlements
+9.  Undo Last Transaction
+10. Reset System
+11. Exit
+------------------------------------------------------------------------
+Choose an option: 6
+
+========================================================================
+Simulation Mode
+========================================================================
+Before minimization:
+
+========================================================================
+Transaction History
+========================================================================
+#     Debtor            Creditor                  Amount
+------------------------------------------------------------------------
+1     A                 B                         100.00
+2     B                 C                          50.00
+3     C                 A                          30.00
+
+After minimization:
+#     Payer             Receiver                  Amount
+------------------------------------------------------------------------
+1     A                 B                          50.00
+2     A                 C                          20.00
+
+------------------------------------------------------------------------
+Transactions before optimization : 3
+Transactions after optimization  : 2
+Transactions reduced             : 1
+
+========================================================================
+Cash Flow Minimization
+========================================================================
+1.  Add Transaction
+2.  View All Transactions
+3.  View Net Balances
+4.  Minimize Cash Flow
+5.  Show Settlement Steps
+6.  Simulation Mode
+7.  Graph Analysis
+8.  Export Final Settlements
+9.  Undo Last Transaction
+10. Reset System
+11. Exit
+------------------------------------------------------------------------
+Choose an option: 7
+
+========================================================================
+Graph Analysis
+========================================================================
+Participants          : 3
+Original transactions : 3
+Circular debt present : Yes
+Independent groups    : 1
+Start index for BFS/DFS (0 to 2): 0
+BFS order             : A B C 
+DFS order             : A B C 
+
+========================================================================
+Cash Flow Minimization
+========================================================================
+1.  Add Transaction
+2.  View All Transactions
+3.  View Net Balances
+4.  Minimize Cash Flow
+5.  Show Settlement Steps
+6.  Simulation Mode
+7.  Graph Analysis
+8.  Export Final Settlements
+9.  Undo Last Transaction
+10. Reset System
+11. Exit
+------------------------------------------------------------------------
+Choose an option: 7
+
+========================================================================
+Graph Analysis
+========================================================================
+Participants          : 3
+Original transactions : 3
+Circular debt present : Yes
+Independent groups    : 1
+Start index for BFS/DFS (0 to 2): 1
+BFS order             : B C A 
+DFS order             : B C A 
+
+========================================================================
+Cash Flow Minimization
+========================================================================
+1.  Add Transaction
+2.  View All Transactions
+3.  View Net Balances
+4.  Minimize Cash Flow
+5.  Show Settlement Steps
+6.  Simulation Mode
+7.  Graph Analysis
+8.  Export Final Settlements
+9.  Undo Last Transaction
+10. Reset System
+11. Exit
+------------------------------------------------------------------------
+Choose an option: 8
+
+========================================================================
+Export Settlements
+========================================================================
+Output file path [settlements.txt]: settle.txt
+Exported settlements to settle.txt
+
+========================================================================
+Cash Flow Minimization
+========================================================================
+1.  Add Transaction
+2.  View All Transactions
+3.  View Net Balances
+4.  Minimize Cash Flow
+5.  Show Settlement Steps
+6.  Simulation Mode
+7.  Graph Analysis
+8.  Export Final Settlements
+9.  Undo Last Transaction
+10. Reset System
+11. Exit
+------------------------------------------------------------------------
+Choose an option: 8
+
+========================================================================
+Export Settlements
+========================================================================
+Output file path [settlements.txt]: settle.md
+Exported settlements to settle.md
+
+========================================================================
+Cash Flow Minimization
+========================================================================
+1.  Add Transaction
+2.  View All Transactions
+3.  View Net Balances
+4.  Minimize Cash Flow
+5.  Show Settlement Steps
+6.  Simulation Mode
+7.  Graph Analysis
+8.  Export Final Settlements
+9.  Undo Last Transaction
+10. Reset System
+11. Exit
+------------------------------------------------------------------------
+Choose an option: 8
+
+========================================================================
+Export Settlements
+========================================================================
+Output file path [settlements.txt]: settle.docx
+Exported settlements to settle.docx
+
+========================================================================
+Cash Flow Minimization
+========================================================================
+1.  Add Transaction
+2.  View All Transactions
+3.  View Net Balances
+4.  Minimize Cash Flow
+5.  Show Settlement Steps
+6.  Simulation Mode
+7.  Graph Analysis
+8.  Export Final Settlements
+9.  Undo Last Transaction
+10. Reset System
+11. Exit
+------------------------------------------------------------------------
+Choose an option: 10
+
+========================================================================
+Reset System
+========================================================================
+Reset all data? 1 = yes, 2 = no: y
+Invalid choice. Enter a number from 1 to 2.
+Reset all data? 1 = yes, 2 = no: 1
+System reset complete.
+
+========================================================================
+Cash Flow Minimization
+========================================================================
+1.  Add Transaction
+2.  View All Transactions
+3.  View Net Balances
+4.  Minimize Cash Flow
+5.  Show Settlement Steps
+6.  Simulation Mode
+7.  Graph Analysis
+8.  Export Final Settlements
+9.  Undo Last Transaction
+10. Reset System
+11. Exit
+------------------------------------------------------------------------
+Choose an option: 2
+
+========================================================================
+Transaction History
+========================================================================
+No transactions recorded yet.
+
+========================================================================
+Cash Flow Minimization
+========================================================================
+1.  Add Transaction
+2.  View All Transactions
+3.  View Net Balances
+4.  Minimize Cash Flow
+5.  Show Settlement Steps
+6.  Simulation Mode
+7.  Graph Analysis
+8.  Export Final Settlements
+9.  Undo Last Transaction
+10. Reset System
+11. Exit
+------------------------------------------------------------------------
+Choose an option: 11
+Goodbye.
