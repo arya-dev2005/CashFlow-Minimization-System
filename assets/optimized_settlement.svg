@@ -1,0 +1,25 @@
+<svg width="1100" height="650" viewBox="0 0 1100 650" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#020617"/><stop offset="1" stop-color="#1e1b4b"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#000" flood-opacity="0.35"/></filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,8 L11,4 z" fill="#a7f3d0"/></marker>
+    <style>.title{font:700 34px Inter,Segoe UI,Arial;fill:#f8fafc}.sub{font:500 16px Inter,Segoe UI,Arial;fill:#cbd5e1}.node{filter:url(#shadow)}.label{font:700 18px Inter,Segoe UI,Arial;fill:#f8fafc;text-anchor:middle}.small{font:600 13px Inter,Segoe UI,Arial;fill:#cbd5e1;text-anchor:middle}.edge{stroke:#a7f3d0;stroke-width:5;fill:none;marker-end:url(#arrow);opacity:.95}.amount{font:800 18px Inter,Segoe UI,Arial;fill:#fde68a;text-anchor:middle}.panel{fill:#0f172a;stroke:#334155;stroke-width:1.2;rx:18;filter:url(#shadow)}.metric{font:800 31px Inter,Segoe UI,Arial;fill:#86efac;text-anchor:middle}.metricLabel{font:600 14px Inter,Segoe UI,Arial;fill:#cbd5e1;text-anchor:middle}</style>
+  </defs>
+  <rect width="1100" height="650" fill="url(#bg)"/>
+  <text x="550" y="55" class="title" text-anchor="middle">Optimized Settlement Graph</text>
+  <text x="550" y="84" class="sub" text-anchor="middle">Greedy heap matching collapses many debts into direct payments between max debtors and max creditors.</text>
+
+  <g class="node"><circle cx="250" cy="250" r="62" fill="#ef4444"/><text x="250" y="247" class="label">Aarav</text><text x="250" y="271" class="small">Debtor ₹1,450</text></g>
+  <g class="node"><circle cx="250" cy="450" r="62" fill="#f97316"/><text x="250" y="447" class="label">Riya</text><text x="250" y="471" class="small">Debtor ₹550</text></g>
+  <g class="node"><circle cx="820" cy="245" r="62" fill="#22c55e"/><text x="820" y="242" class="label">Meera</text><text x="820" y="266" class="small">Creditor ₹1,200</text></g>
+  <g class="node"><circle cx="820" cy="455" r="62" fill="#8b5cf6"/><text x="820" y="452" class="label">Kabir</text><text x="820" y="476" class="small">Creditor ₹800</text></g>
+
+  <path class="edge" d="M314 247 C455 160, 610 160, 755 239"/><text class="amount" x="535" y="178">₹1,200</text>
+  <path class="edge" d="M312 270 C455 360, 610 378, 760 434"/><text class="amount" x="535" y="383">₹250</text>
+  <path class="edge" d="M314 450 C480 520, 620 520, 756 470"/><text class="amount" x="535" y="540">₹550</text>
+
+  <rect x="405" y="430" width="290" height="125" class="panel"/>
+  <text x="550" y="465" class="sub" text-anchor="middle">Optimization Impact</text>
+  <text x="487" y="512" class="metric">8 → 3</text><text x="487" y="535" class="metricLabel">transactions</text>
+  <text x="615" y="512" class="metric">62.5%</text><text x="615" y="535" class="metricLabel">reduction</text>
+</svg>

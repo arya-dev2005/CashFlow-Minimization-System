@@ -1,155 +1,247 @@
-# Cash Flow Minimization CLI
+<div align="center">
 
-A polished C++17 console application that minimizes the number of transactions needed to settle debts among multiple people. It is designed as a resume/interview project that demonstrates greedy algorithms, heaps, graph traversal, clean architecture, input validation, and CLI UX.
+# 💸 Smart Cash Flow Optimizer CLI
 
-## Key Features
+### A C++ graph-based debt settlement engine that converts messy real-world expenses into minimum optimized payments.
 
-- Menu-driven console interface
-- Add, view, undo, reset, and export transactions
-- Real-time net balance updates after each transaction
-- Greedy settlement using two `priority_queue` heaps
-- Step-by-step settlement explanation
-- Simulation mode showing before vs after minimization
-- Performance metrics: original transactions vs optimized settlements
-- DFS/BFS graph traversal helpers
-- Circular debt detection such as `A -> B -> C -> A`
-- Independent group counting for disconnected debt groups
+![C++](https://img.shields.io/badge/C++-17-blue?style=for-the-badge&logo=cplusplus)
+![DSA](https://img.shields.io/badge/DSA-Greedy%20%7C%20Heap%20%7C%20Graph-purple?style=for-the-badge)
+![CLI](https://img.shields.io/badge/UI-Console%20Application-green?style=for-the-badge)
+![Status](https://img.shields.io/badge/Project-Placement%20Ready-orange?style=for-the-badge)
 
-## Architecture
+</div>
+
+---
+
+## 📌 Problem Statement
+
+Imagine a weekend trip with friends, a college event, or a shared apartment where everyone pays for different things: hotel, food, tickets, fuel, and activities. By the end, the payment network becomes messy:
+
+- Aarav owes Meera.
+- Meera owes Kabir.
+- Kabir owes Riya.
+- Riya owes Aarav.
+- Some people are both debtors and creditors at the same time.
+
+Instead of settling every original debt one by one, this project computes each participant's **net balance** and generates the **minimum number of final settlement transactions**.
+
+<p align="center">
+  <img src="assets/problem_graph.svg" alt="Original debt graph" width="850">
+</p>
+
+---
+
+## 🎯 Objective
+
+The goal is to transform a dense directed debt graph into a compact settlement graph.
 
 ```text
-main.cpp
-UI.h / UI.cpp
-CashFlow.h / CashFlow.cpp
-Graph.h / Graph.cpp
-Utils.h / Utils.cpp
-Models.h
-.vscode/tasks.json
+Before optimization: many pairwise debts
+After optimization : only essential payments remain
 ```
+
+<p align="center">
+  <img src="assets/optimized_settlement.svg" alt="Optimized settlement graph" width="850">
+</p>
+
+---
+
+## ✨ Key Features
+
+- 🧾 Add, view, undo, reset, and export transactions
+- 📊 Real-time net balance calculation
+- ⚡ Greedy optimization using two `priority_queue` heaps
+- 🧭 DFS/BFS graph traversal helpers
+- 🔁 Circular debt detection such as `A → B → C → A`
+- 🧩 Independent group counting for disconnected components
+- 🖥️ Menu-driven console UI with structured output
+- 🧪 Simulation mode: compare before vs after minimization
+- 📉 Performance metrics: original transactions vs optimized settlements
+- 🧼 Input validation for names, amounts, and menu choices
+
+---
+
+## 🖥️ Console Preview
+
+<p align="center">
+  <img src="assets/cli_preview.svg" alt="Console UI preview" width="850">
+</p>
+
+---
+
+## 🧠 Core Idea
+
+Every transaction is represented as a directed graph edge:
+
+```text
+A owes B ₹100
+```
+
+So the balance update becomes:
+
+```text
+A = A - 100
+B = B + 100
+```
+
+After processing all transactions:
+
+| Balance Type | Meaning |
+|---|---|
+| Negative | Person is a debtor |
+| Positive | Person is a creditor |
+| Zero | Person is already settled |
+
+The optimizer ignores zero balances and directly matches the largest debtor with the largest creditor.
+
+---
+
+## ⚙️ Algorithm Pipeline
+
+<p align="center">
+  <img src="assets/algorithm_pipeline.svg" alt="Algorithm pipeline" width="900">
+</p>
+
+### Step-by-step logic
+
+1. Read all original transactions.
+2. Build net balances for every participant.
+3. Push creditors into a max-heap.
+4. Push debtors into a max-heap based on absolute debt value.
+5. Repeatedly match:
+   - largest debtor
+   - largest creditor
+6. Settle the minimum possible amount between them.
+7. Push remaining balance back into the respective heap.
+8. Stop when both heaps are empty.
+
+---
+
+## 🧮 Greedy Strategy
+
+At each iteration, the algorithm chooses the participant who owes the most and the participant who should receive the most.
+
+```cpp
+settledAmount = min(abs(maxDebtor.balance), maxCreditor.balance);
+```
+
+This works efficiently because each settlement fully clears at least one participant:
+
+- The debtor becomes zero, or
+- The creditor becomes zero, or
+- Both become zero
+
+That means every transaction reduces the active problem size.
+
+---
+
+## 🏗️ Project Architecture
+
+```text
+Cash-Flow-Minimizer/
+│
+├── main.cpp              # Application entry point
+├── Models.h              # Transaction, Settlement, Result models
+│
+├── UI.h
+├── UI.cpp                # Menu, input prompts, tables, CLI rendering
+│
+├── CashFlow.h
+├── CashFlow.cpp          # Net balance + heap-based minimization logic
+│
+├── Graph.h
+├── Graph.cpp             # DFS, BFS, cycle detection, components
+│
+├── Utils.h
+├── Utils.cpp             # Validation, formatting, ANSI helpers
+│
+├── .vscode/
+│   └── tasks.json        # VS Code build task
+│
+└── assets/
+    ├── problem_graph.svg
+    ├── optimized_settlement.svg
+    ├── algorithm_pipeline.svg
+    └── cli_preview.svg
+```
+
+---
+
+## 🧩 Module Responsibilities
 
 ### `main.cpp`
+Starts the application and delegates control to the console UI.
 
-Application entry point. It creates `ConsoleUI` and starts the interactive menu loop.
-
-### `UI.h` / `UI.cpp`
-
-UI layer. Responsible for:
+### `UI.cpp / UI.h`
+Handles the user-facing layer:
 
 - Menu rendering
-- Input prompts
-- Structured tables
+- User input
+- Tables and formatted output
 - Step-by-step settlement display
-- Export command
-- Simulation mode
+- Simulation and export options
 
-It does not implement the heap algorithm directly.
+### `CashFlow.cpp / CashFlow.h`
+Handles business logic:
 
-### `CashFlow.h` / `CashFlow.cpp`
-
-Service and data layer. Responsible for:
-
-- Storing participants
-- Storing transaction history
+- Transaction storage
 - Undo stack
 - Net balance calculation
-- Greedy minimization
-- Settlement export
+- Greedy heap settlement
+- Exporting final results
 
-Important functions:
+### `Graph.cpp / Graph.h`
+Handles graph-related analysis:
 
-- `addTransaction(...)`
-- `undoLastTransaction()`
-- `calculateNetBalances()`
-- `minimizeTransactions()`
-- `exportSettlements(...)`
-
-### `Graph.h` / `Graph.cpp`
-
-Graph helper module. Responsible for:
-
-- Building adjacency lists from transactions
+- Adjacency list creation
 - BFS traversal
 - DFS traversal
-- Directed cycle detection
+- Circular debt detection
 - Independent group counting
 
-### `Utils.h` / `Utils.cpp`
+### `Utils.cpp / Utils.h`
+Contains reusable utilities:
 
-Reusable console helpers:
+- Input validation
+- Amount formatting
+- Console separators
+- ANSI color helpers
 
-- Validated integer input
-- Validated positive amount input
-- Validated names
-- Money formatting
-- Separators
-- ANSI color wrappers
+---
 
-### `Models.h`
-
-Shared data structures:
-
-- `Transaction`
-- `Settlement`
-- `SettlementStep`
-- `SettlementResult`
-
-## Greedy Logic
-
-Each transaction is treated as a graph edge:
+## 📥 Sample Input Scenario
 
 ```text
-A owes B 100
+Aarav  -> Meera : ₹1200
+Meera  -> Kabir : ₹700
+Kabir  -> Riya  : ₹950
+Riya   -> Aarav : ₹500
+Aarav  -> Kabir : ₹650
+Riya   -> Kabir : ₹400
+Meera  -> Riya  : ₹300
+Kabir  -> Meera : ₹250
 ```
 
-This means:
+---
+
+## 📤 Optimized Output
 
 ```text
-A balance -= 100
-B balance += 100
+#     Payer        Receiver      Amount
+-------------------------------------------
+1     Aarav        Meera         ₹1200
+2     Aarav        Kabir         ₹250
+3     Riya         Kabir         ₹550
+
+Transactions before optimization : 8
+Transactions after optimization  : 3
+Transactions reduced             : 5
+Reduction percentage             : 62.50%
 ```
 
-After all transactions:
+---
 
-- Negative balance means the person is a debtor.
-- Positive balance means the person is a creditor.
-- Zero-balance users are ignored during settlement.
-
-The optimizer uses:
-
-- A max-heap for creditors by receivable amount
-- A max-heap for debtors by absolute owed amount
-
-At each step:
-
-1. Pick the largest debtor.
-2. Pick the largest creditor.
-3. Settle the smaller of the two amounts.
-4. Push any remaining non-zero amount back into its heap.
-
-This reduces the debt graph into a compact set of direct settlement transactions.
-
-## Build and Run
-
-### VS Code
-
-1. Install MinGW-w64 or another compiler that provides `g++`.
-2. Make sure `g++` is available in PATH.
-3. Open this folder in VS Code.
-4. Press `Ctrl+Shift+B`.
-5. Run:
-
-```powershell
-.\cashflow.exe
-```
-
-### Terminal
-
-```powershell
-g++ -std=c++17 -Wall -Wextra -O2 main.cpp UI.cpp CashFlow.cpp Graph.cpp Utils.cpp -o cashflow.exe
-.\cashflow.exe
-```
-
-## Sample Run
+## 🔁 Circular Debt Example
 
 ```text
 ========================================================================
@@ -183,15 +275,23 @@ ID    Name                  Status               Balance
 1     B                     Receives              100.00
 ```
 
-Circular debt example:
+Sample Run
 
 ```text
-A owes B 100
-B owes C 50
-C owes A 30
+A owes B ₹100
+B owes C ₹50
+C owes A ₹30
 ```
 
-Optimized result:
+Net balances:
+
+```text
+A = -70
+B = +50
+C = +20
+```
+
+Optimized settlement:
 
 ```text
 #     Payer             Receiver                  Amount
@@ -213,18 +313,31 @@ Step 2: choose largest debtor A (owes 20.00) and largest creditor C (receives 20
         Settle 20.00. Remaining debtor liability: 0.00, creditor claim: 0.00.
 ```
 
-## Edge Cases Handled
+```text
+A pays B ₹50
+A pays C ₹20
+```
 
-- Zero-balance users
-- Already settled systems
-- Circular debts
-- Single remaining participant after undo/reset behavior
-- Large transaction lists
-- Duplicate transactions
-- Invalid names and amounts
-- Self-debts are rejected
+The circular chain is removed because the algorithm settles based on net balance instead of blindly preserving every original edge.
 
-## Complexity
+---
+
+## 🧪 Edge Cases Handled
+
+| Edge Case | Handling |
+|---|---|
+| Zero-balance participant | Ignored during heap settlement |
+| Already settled system | Returns no settlement transactions |
+| Circular debt | Reduced using net balance calculation |
+| Duplicate transactions | Treated as valid separate records |
+| Self-debt | Rejected by validation |
+| Invalid amount | Re-prompted until valid input is given |
+| Disconnected groups | Graph helper can count independent components |
+| Large input | Heap-based approach keeps optimization efficient |
+
+---
+
+## ⏱️ Complexity Analysis
 
 Let:
 
@@ -233,17 +346,148 @@ Let:
 - `K` = number of non-zero-balance participants
 - `T` = number of optimized settlement transactions
 
-| Operation | Time | Space |
-| --- | --- | --- |
+| Operation | Time Complexity | Space Complexity |
+|---|---:|---:|
 | Net balance calculation | `O(E)` | `O(N)` |
 | Heap construction | `O(K log K)` | `O(K)` |
 | Greedy settlement | `O(T log K)` | `O(T)` |
-| BFS / DFS / cycle detection | `O(N + E)` | `O(N + E)` |
+| DFS / BFS traversal | `O(N + E)` | `O(N + E)` |
+| Cycle detection | `O(N + E)` | `O(N)` |
 
-Overall settlement complexity is:
+Overall settlement complexity:
 
 ```text
 O(E + K log K + T log K)
 ```
 
-The implementation remains efficient for large inputs while keeping the user experience suitable for demonstrations.
+---
+
+## 🆚 Naive vs Optimized Approach
+
+| Approach | Behavior | Drawback / Benefit |
+|---|---|---|
+| Naive settlement | Preserve original debt edges | May require many unnecessary payments |
+| Net balance approach | Collapse all incoming/outgoing money | Removes redundant cycles |
+| Heap-based greedy | Match largest debtor with largest creditor | Efficient and easy to explain in interviews |
+
+---
+
+## 🚀 Build and Run
+
+### Using VS Code
+
+1. Install a C++ compiler such as `g++` through MinGW-w64.
+2. Make sure `g++` is available in your system PATH.
+3. Open the project folder in VS Code.
+4. Press:
+
+```text
+Ctrl + Shift + B
+```
+
+5. Run the generated executable.
+
+```powershell
+.\cashflow.exe
+```
+
+### Using Terminal
+
+```bash
+g++ -std=c++17 -Wall -Wextra -O2 main.cpp UI.cpp CashFlow.cpp Graph.cpp Utils.cpp -o cashflow
+./cashflow
+```
+
+For Windows PowerShell:
+
+```powershell
+g++ -std=c++17 -Wall -Wextra -O2 main.cpp UI.cpp CashFlow.cpp Graph.cpp Utils.cpp -o cashflow.exe
+.\cashflow.exe
+```
+
+---
+
+## 🧭 Menu Options
+
+```text
+1.  Add Transaction
+2.  View All Transactions
+3.  View Net Balances
+4.  Minimize Cash Flow
+5.  Show Settlement Steps
+6.  Simulation Mode
+7.  Graph Analysis
+8.  Export Final Settlements
+9.  Undo Last Transaction
+10. Reset System
+11. Exit
+```
+
+---
+
+## 📄 Export Format
+
+The application can export final settlements to a text file:
+
+```text
+settlements.txt
+```
+
+Example:
+
+```text
+Final Optimized Settlements
+-------------------------------------------
+Aarav pays Meera ₹1200
+Aarav pays Kabir ₹250
+Riya pays Kabir ₹550
+```
+
+---
+
+## 💼 Why This Project Is Interview-Friendly
+
+This project demonstrates:
+
+- Graph modeling
+- Greedy algorithms
+- Priority queues / heaps
+- DFS and BFS traversal
+- Cycle detection
+- Modular C++ design
+- Console UI/UX
+- Real-world financial problem solving
+- Clean separation of concerns
+
+---
+
+## 🔮 Future Enhancements
+
+- JSON or CSV import/export
+- Unit tests using GoogleTest
+- Persistent transaction database
+- GUI version using Qt
+- Web dashboard version
+- Multi-currency support
+- Payment-mode constraints such as UPI, card, wallet, bank transfer
+- Weighted settlement preferences based on transaction limits or trust score
+
+---
+
+## 📚 Learning Outcomes
+
+After building this project, you will understand:
+
+- How to convert real-world debt relationships into a graph
+- Why net balance removes redundant circular payments
+- How heaps improve greedy selection efficiency
+- How to design modular C++ applications
+- How to present an algorithmic project professionally on GitHub
+
+---
+
+<div align="center">
+
+### ⭐ If this project helped you learn graph optimization and greedy algorithms, consider starring the repository.
+
+</div>

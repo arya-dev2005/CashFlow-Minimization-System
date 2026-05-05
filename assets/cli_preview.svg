@@ -1,0 +1,19 @@
+<svg width="1100" height="680" viewBox="0 0 1100 680" xmlns="http://www.w3.org/2000/svg">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#020617"/><stop offset="1" stop-color="#0f172a"/></linearGradient><filter id="shadow"><feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#000" flood-opacity="0.45"/></filter><style>.term{fill:#0b1220;stroke:#334155;stroke-width:1.2;rx:24;filter:url(#shadow)}.bar{fill:#111827}.dot1{fill:#ef4444}.dot2{fill:#f59e0b}.dot3{fill:#22c55e}.mono{font:600 20px Consolas,Monaco,monospace;fill:#d1d5db}.green{fill:#86efac}.blue{fill:#93c5fd}.yellow{fill:#fde68a}.red{fill:#fca5a5}.title{font:800 30px Inter,Segoe UI,Arial;fill:#f8fafc;text-anchor:middle}</style></defs>
+  <rect width="1100" height="680" fill="url(#bg)"/>
+  <text x="550" y="52" class="title">Console UI Preview</text>
+  <rect x="80" y="90" width="940" height="520" class="term"/>
+  <rect x="80" y="90" width="940" height="54" class="bar" rx="24"/>
+  <circle cx="120" cy="118" r="9" class="dot1"/><circle cx="148" cy="118" r="9" class="dot2"/><circle cx="176" cy="118" r="9" class="dot3"/>
+  <text x="210" y="126" class="mono blue">cashflow-minimizer.exe</text>
+  <text x="115" y="185" class="mono green">========================================================================</text>
+  <text x="115" y="220" class="mono yellow">                  CASH FLOW MINIMIZATION CLI</text>
+  <text x="115" y="255" class="mono green">========================================================================</text>
+  <text x="115" y="302" class="mono">1. Add Transaction        6. Simulation Mode</text>
+  <text x="115" y="337" class="mono">2. View Transactions      7. Graph Analysis</text>
+  <text x="115" y="372" class="mono">3. View Net Balances      8. Export Settlements</text>
+  <text x="115" y="407" class="mono">4. Minimize Cash Flow     9. Undo Last Transaction</text>
+  <text x="115" y="442" class="mono">5. Settlement Steps      10. Reset System</text>
+  <text x="115" y="492" class="mono blue">Choose option: </text><text x="300" y="492" class="mono yellow">4</text>
+  <text x="115" y="542" class="mono green">✓ Optimized settlements generated: 3 payments instead of 8.</text>
+</svg>
